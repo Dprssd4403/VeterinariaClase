@@ -1,0 +1,50 @@
+<section class="py-16 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center">
+            {{ titulo }}
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            @for (doctor of doctores; track doctor.nombre) {
+
+            <div
+                class="flex flex-col rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-800 group">
+
+                <div class="relative h-72 overflow-hidden">
+                    <img [src]="doctor.foto" [alt]="doctor.nombre" [class.grayscale]="!doctor.activo"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+
+                    @if (!doctor.activo) {
+                    <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-[1px] flex items-center justify-center">
+                        <span
+                            class="bg-white text-slate-900 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">
+                            Fuera de Servicio
+                        </span>
+                    </div>
+                    }
+                </div>
+
+                <div class="p-6 flex flex-col flex-grow">
+                    <h4 class="text-xl font-bold text-slate-900 dark:text-white">
+                        {{ doctor.nombre }}
+                    </h4>
+
+                    <p class="text-sm text-indigo-600 dark:text-indigo-400 font-semibold italic mt-1 mb-4">
+                        {{ doctor.especialidad }}
+                    </p>
+
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed flex-grow">
+                        {{ doctor.descripcion }}
+                    </p>
+                </div>
+            </div>
+
+            } @empty {
+            <div
+                class="col-span-full text-center py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200">
+                <p class="text-slate-400 font-medium italic text-lg">Cargando el equipo de especialistas...</p>
+            </div>
+            }
+        </div>
+    </div>
+</section>

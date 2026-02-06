@@ -1,3 +1,16 @@
-<app-hero-acerca></app-hero-acerca>
-<app-card-acerca></app-card-acerca>
-<app-doctores-acerca></app-doctores-acerca>
+<app-hero 
+    titulo="Nuestra Historia: Pasión por la Vida Animal"
+    subtitulo="Cuidando de ellos como si fueran nuestra familia desde 2010."
+    descripcion="Desde nuestra fundación en 2010, nacimos con una misión clara: elevar el estándar del cuidado veterinario a través de la empatía. Creemos que la medicina de alta calidad no tiene por qué ser fría; por eso, combinamos tecnología de vanguardia con un enfoque profundamente humano y ético. En estos más de 15 años, hemos crecido junto a cientos de familias, entendiendo que cada mascota no es solo un paciente, sino un miembro vital de tu hogar que merece respeto, paciencia y excelencia médica."
+    imagen="https://verdecora.es/blog/wp-content/uploads/2018/03/hierba-para-gatos-beneficios.jpg"
+    [mostrarBoton]="false"
+></app-hero>
+<app-card
+    titulo="Por qué confiar en nosotros"
+    subtitulo="Nuestros pilares fundamentales como clínica veterinaria."
+    [valores]="valores"
+></app-card>
+<app-detalles-doctores
+    titulo="Nuestro Equipo Médico"
+    [doctores]="doctores"
+></app-detalles-doctores>

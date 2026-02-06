@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-hero',
@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './hero.css',
 })
 export class Hero {
-
+  //Los datos vacios que llenaremos en cad uso del componente
+  @Input() titulo!: string;
+  @Input() subtitulo!: string;
+  @Input() descripcion!: string;
+  @Input() imagen!: string;
+  @Input() button!: string;
+  @Input({ required: true }) mostrarBoton!: boolean;
 }
