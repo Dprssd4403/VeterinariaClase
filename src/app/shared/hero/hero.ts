@@ -14,4 +14,5 @@ export class Hero {
   @Input() imagen!: string;
   @Input() button!: string;
   @Input({ required: true }) mostrarBoton!: boolean;
+  @Input() colorFondo!:string;
 }
