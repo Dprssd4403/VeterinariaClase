@@ -5,6 +5,7 @@ import { Consulta } from './features/consulta/consulta';
 import { Mascotas } from './shared/mascotas/mascotas';
 import { Registro } from './features/registro/registro';
 import { Contacto } from './features/contacto/contacto';
+import { FormularioCuenta } from './shared/formulario-cuenta/formulario-cuenta';
 
 export const routes: Routes = [
 
@@ -15,7 +16,8 @@ export const routes: Routes = [
     { path: 'consulta', component: Consulta },
     { path: 'mascota', component: Mascotas},
     { path: 'registro', component: Registro},
-    { path: 'contacto', component: Contacto}
+    { path: 'contacto', component: Contacto},
+    { path: 'cuenta', component:FormularioCuenta}
     //FINAL
     //3.Redireccion si el usuario escribe una url que no existe
     //{path:'**', component:Pagina404}

@@ -1,6 +1,6 @@
 <section class="relative bg-white dark:bg-gray-900 overflow-hidden">
     <div class="absolute top-0 right-0 -translate-y-12 translate-x-12 blur-3xl opacity-10 dark:opacity-20">
-        <div class="aspect-square w-[400px] rounded-full bg-blue-600"></div>
+        <div class="aspect-square w-[400px] rounded-full bg-indigo-600"></div>
     </div>
 
     <div class="container px-6 py-12 mx-auto">
@@ -8,39 +8,36 @@
             <div class="w-full lg:w-1/2">
                 <div class="lg:max-w-lg">
                     <span
-                        class="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full dark:bg-blue-900/30 dark:text-blue-400">
-                        {{titulo}}
-                    </span>
+                        class="px-3 py-1 text-sm font-medium text-indigo-600 bg-indigo-100 rounded-full dark:bg-indigo-900/30 dark:text-indigo-400">
+                        {{titulo}} </span>
 
                     <h1 class="mt-4 text-4xl font-extrabold text-gray-800 dark:text-white lg:text-5xl leading-tight">
-                        {{subtitulo}}
-                    </h1>
+                        {{subtitulo}} </h1>
 
                     <p class="mt-6 text-lg text-gray-600 dark:text-gray-400">
-                        {{descripcion}}
-                    </p>
+                        {{descripcion}} </p>
+
                     @if (mostrarBoton) {
-                    <div class="mt-8">
+                    <div class="mt-8 flex gap-4">
                         <button type="button"
-                            class="px-6 py-3 font-semibold text-white transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-                            {{ button || 'Registrarse' }}
+                            class="px-6 py-3 font-semibold text-white transition-colors duration-300 transform bg-indigo-600 rounded-lg hover:bg-indigo-500 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80">
+                            {{ button || 'Explorar Cursos' }}
                         </button>
+
                     </div>
                     }
                 </div>
             </div>
 
-
             <div class="flex items-center justify-center w-full mt-12 lg:mt-0 lg:w-1/2">
                 <div class="relative group">
                     <div
-                        class="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-100 dark:bg-blue-900/20 rounded-2xl -z-10 transition-transform group-hover:-translate-x-2 group-hover:translate-y-2">
+                        class="absolute -bottom-6 -right-6 w-32 h-32 bg-indigo-100 dark:bg-indigo-900/20 rounded-2xl -z-10 transition-transform group-hover:translate-x-2 group-hover:translate-y-2">
                     </div>
 
                     <img class="object-cover w-full h-[450px] rounded-2xl shadow-2xl ring-8 ring-white dark:ring-gray-800"
-                        [src]="imagen" alt="Veterinaria cuidando a una mascota" />
+                        [src]="imagen" alt="Estudiante aprendiendo en plataforma digital" />
                 </div>
-
             </div>
         </div>
     </div>

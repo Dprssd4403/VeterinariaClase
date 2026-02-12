@@ -1,7 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
-import { UsuarioServices } from '../../services/usuario-services';
-import { Usuario } from '../../models/usuarios';
+import { Component, inject, OnInit, signal } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
+import { Usuario, UsuarioServices } from '../../services/usuario-services';
 
 @Component({
   selector: 'app-formulario',
@@ -9,19 +9,23 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './formulario.html',
   styleUrl: './formulario.css',
 })
-export class Formulario {
+export class Formulario implements OnInit {
 
   private servicioUsuario = inject(UsuarioServices);
 
   listaUsuarios = signal<Usuario[]>([]);
 
+  editando = false;
+
   nuevoUsuario: Usuario = {
+    
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    
   };
 
-  ngOnInit() {
+  ngOnInit():void {
     this.obtenerUsuarios();
   }
 
@@ -32,7 +36,43 @@ export class Formulario {
     });
   }
 
+  //MetodoGuardar
   guardarUsuario() {
+    if (this.editando && this.nuevoUsuario.id) {
+      this.servicioUsuario.putUsuario(this.nuevoUsuario.id, this.nuevoUsuario).subscribe(() => {
+        this.obtenerUsuarios();
+        this.resetear();
+      });
+    }
+    else {
+      this.servicioUsuario.postUsuario(this.nuevoUsuario).subscribe(() => {
+        this.obtenerUsuarios();
+        this.resetear();
+      })
+    }
+  }
+
+  //Metodo Eliminar
+  eliminarUsuario(id: string) {
+    if (confirm('¿Desea eliminar el registro?')) {
+      this.servicioUsuario.deleteUsuario(id).subscribe(() => {
+        this.listaUsuarios.set(this.listaUsuarios().filter(u => u.id !== id));
+      })
+    }
+  }
+
+  //Metodo para poner los datos seleccionados en el formulario
+  seleccionarParaEditar(user: Usuario) {
+    this.editando = true;
+    this.nuevoUsuario = { ...user };
+  }
+
+  resetear() {
+    this.editando = false;
+    this.nuevoUsuario = { name: '', email: '', phone: '' }
+  }
+
+  /*guardarUsuario() {
 
     this.servicioUsuario.postUsuario(this.nuevoUsuario).subscribe(respuesta => {
       //...Spread Operator: combina el nuevo usuario con la lista Usuarios                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
@@ -40,5 +80,6 @@ export class Formulario {
       //limpiar el form
       this.nuevoUsuario = { name: '', email: '', phone: '' };
     })
-  }
+  }*/
+
 }
