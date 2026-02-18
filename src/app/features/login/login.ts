@@ -27,9 +27,4 @@ export class Login {
       }
     });
   }
-
-  cerrarSesion() {
-    this.servicioAuth.logout();
-    alert('Sesión cerrada correctamente');
-  }
 }
