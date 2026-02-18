@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { Usuario, UsuarioServices } from '../../services/usuario-services';
+import { AuthService } from '../../services/auth-services';
 
 @Component({
   selector: 'app-formulario',
@@ -13,6 +14,8 @@ export class Formulario implements OnInit {
 
   private servicioUsuario = inject(UsuarioServices);
 
+  public servicioAuth = inject(AuthService);
+
   listaUsuarios = signal<Usuario[]>([]);
 
   editando = false;
@@ -22,7 +25,8 @@ export class Formulario implements OnInit {
     name: '',
     email: '',
     phone: '',
-    password:''
+    password:'',
+    rol: 'USUARIO'
     
   };
 
@@ -70,7 +74,7 @@ export class Formulario implements OnInit {
 
   resetear() {
     this.editando = false;
-    this.nuevoUsuario = { name: '', email: '', phone: '' , password:''}
+    this.nuevoUsuario = { name: '', email: '', phone: '' , password:'', rol: 'USUARIO'}
   }
 
   /*guardarUsuario() {

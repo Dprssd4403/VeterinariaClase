@@ -12,6 +12,10 @@ export class AuthService {
   //localStorage
   sesionIniciada = signal<boolean>(localStorage.getItem('sesion') === 'true');
 
+  //Accedemos al rol de usuario
+  rolActual = signal<string | null>(localStorage.getItem('rol'));
+
+
   login(email: string, password: string): Observable<boolean> {
     return this.servicioUsuario.getUsuarios().pipe(
       map(usuarios => {
@@ -20,7 +24,12 @@ export class AuthService {
           localStorage.setItem('sesion', 'true');
           //guardar estos datos convirtiendo el objeto json a texto
           localStorage.setItem('user', JSON.stringify(usuarioCoincide));
+          //guardar rol
+          localStorage.setItem('rol', usuarioCoincide.rol);
+          this.rolActual.set(usuarioCoincide.rol);
           this.sesionIniciada.set(true);
+
+
           return true;
         }
         return false;
@@ -32,5 +41,7 @@ export class AuthService {
     localStorage.removeItem('sesion');
     localStorage.removeItem('user');
     this.sesionIniciada.set(false);
+    localStorage.removeItem('rol');
+    this.rolActual.set(null);
   }
 }
