@@ -1,8 +1,9 @@
 
 import { RouterLink } from "@angular/router";
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from "../../services/auth-services";
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,4 +15,10 @@ import { RouterModule } from '@angular/router';
 })
 export class NavBar {
 
+  private servicioAuth = inject(AuthService);
+
+  cerrarSesion() {
+    this.servicioAuth.logout();
+    alert('Sesión cerrada correctamente');
+  }
 }

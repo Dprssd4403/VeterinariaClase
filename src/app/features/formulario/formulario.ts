@@ -26,7 +26,7 @@ export class Formulario implements OnInit {
     email: '',
     phone: '',
     password:'',
-    rol: 'USUARIO'
+    rol: 'EMPLEADO'
     
   };
 
@@ -40,7 +40,7 @@ export class Formulario implements OnInit {
       this.listaUsuarios.set(usuarios);
     });
   }
-
+ 
   //MetodoGuardar
   guardarUsuario() {
     if (this.editando && this.nuevoUsuario.id) {
@@ -74,7 +74,7 @@ export class Formulario implements OnInit {
 
   resetear() {
     this.editando = false;
-    this.nuevoUsuario = { name: '', email: '', phone: '' , password:'', rol: 'USUARIO'}
+    this.nuevoUsuario = { name: '', email: '', phone: '' , password:'', rol: 'EMPLEADO'}
   }
 
   /*guardarUsuario() {

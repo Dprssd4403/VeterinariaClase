@@ -8,7 +8,7 @@ export interface Usuario{
   email: string;
   phone: string;
   password: string;
-  rol: 'ADMIN' | 'USUARIO';
+  rol: 'ADMIN' | 'EMPLEADO';
   username?: string;
   website?: string;
 }
