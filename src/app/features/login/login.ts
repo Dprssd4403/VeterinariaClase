@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AuthServices } from '../../services/auth-services';
+import { AuthService} from '../../services/auth-services';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ export class Login {
   email: string = '';
   password: string = '';
 
-  private servicioAuth = inject(AuthServices);
+  private servicioAuth = inject(AuthService);
 
   private router = inject(Router);
 
@@ -29,6 +29,6 @@ export class Login {
   }
 
   cerrarSesion() {
-    this.servicioAuth.logout();
+    this.servicioAuth.logout();  
   }
 }

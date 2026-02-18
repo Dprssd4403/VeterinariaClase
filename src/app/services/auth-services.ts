@@ -1,16 +1,15 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 import { UsuarioServices } from './usuario-services';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthServices {
+export class AuthService {
 
   private servicioUsuario = inject(UsuarioServices);
 
-  //LocalStorage
+  //localStorage
   sesionIniciada = signal<boolean>(localStorage.getItem('sesion') === 'true');
 
   login(email: string, password: string): Observable<boolean> {
@@ -19,19 +18,15 @@ export class AuthServices {
         const usuarioCoincide = usuarios.find(u => u.email === email && u.password === password);
         if (usuarioCoincide) {
           localStorage.setItem('sesion', 'true');
-          //guardar datos convirtiendo el objeto json a texto
+          //guardar estos datos convirtiendo el objeto json a texto
           localStorage.setItem('user', JSON.stringify(usuarioCoincide));
           this.sesionIniciada.set(true);
           return true;
         }
-        return false
+        return false;
       })
-    )
+    );
   }
-
-  /*registrar(email: string, password: string) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
-  }*/
 
   logout() {
     localStorage.removeItem('sesion');

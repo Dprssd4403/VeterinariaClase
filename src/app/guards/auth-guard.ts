@@ -1,10 +1,11 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthServices } from '../services/auth-services';
+import { AuthService } from '../services/auth-services';
+
 
 export const authGuard: CanActivateFn = (route, state) => {
 
-  const servicioAuth = inject(AuthServices);
+  const servicioAuth = inject(AuthService);
   const router = inject(Router);
 
   if(servicioAuth.sesionIniciada()){
