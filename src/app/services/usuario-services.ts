@@ -7,6 +7,7 @@ export interface Usuario{
   name: string;
   email: string;
   phone: string;
+  password: string;
   username?: string;
   website?: string;
 }

@@ -22,6 +22,7 @@ export class Formulario implements OnInit {
     name: '',
     email: '',
     phone: '',
+    password:''
     
   };
 
@@ -69,7 +70,7 @@ export class Formulario implements OnInit {
 
   resetear() {
     this.editando = false;
-    this.nuevoUsuario = { name: '', email: '', phone: '' }
+    this.nuevoUsuario = { name: '', email: '', phone: '' , password:''}
   }
 
   /*guardarUsuario() {
