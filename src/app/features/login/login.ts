@@ -21,7 +21,7 @@ export class Login {
     this.servicioAuth.login(this.email, this.password).subscribe(success => {
       if (success) {
         alert('Bienvenidos al sistema');
-        this.router.navigate(['/mascota']);
+        this.router.navigate(['/registro']);
       }else{
         alert('Error: usuario no autenticado');
       }
