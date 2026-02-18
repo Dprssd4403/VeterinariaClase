@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AuthService} from '../../services/auth-services';
+import { AuthService } from '../../services/auth-services';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -22,13 +22,14 @@ export class Login {
       if (success) {
         alert('Bienvenidos al sistema');
         this.router.navigate(['/registro']);
-      }else{
+      } else {
         alert('Error: usuario no autenticado');
       }
     });
   }
 
   cerrarSesion() {
-    this.servicioAuth.logout();  
+    this.servicioAuth.logout();
+    alert('Sesión cerrada correctamente');
   }
 }
