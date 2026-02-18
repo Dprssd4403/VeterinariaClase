@@ -6,6 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
+
     "veterinaria": {
       "projectType": "application",
       "schematics": {},

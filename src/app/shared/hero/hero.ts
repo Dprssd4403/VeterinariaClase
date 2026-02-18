@@ -7,7 +7,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './hero.css',
 })
 export class Hero {
+
   //Los datos vacios que llenaremos en cad uso del componente
+
+
   @Input() titulo!: string;
   @Input() subtitulo!: string;
   @Input() descripcion!: string;
@@ -15,4 +18,5 @@ export class Hero {
   @Input() button!: string;
   @Input({ required: true }) mostrarBoton!: boolean;
   @Input() colorFondo!:string;
+
 }

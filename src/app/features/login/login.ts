@@ -1,0 +1,25 @@
+import { Component, inject } from '@angular/core';
+import { AuthServices } from '../../services/auth-services';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-login',
+  imports: [FormsModule],
+  templateUrl: './login.html',
+  styleUrl: './login.css',
+})
+export class Login {
+  email:string='';
+  password: string='';
+
+  private servicioAuth = inject(AuthServices);
+
+  iniciarSesion(){
+    this.servicioAuth.login(this.email, this.password);
+    alert('Bienvenidos al sistema')
+  }
+
+  cerrarSesion(){
+    this.servicioAuth.logout();
+  }
+}

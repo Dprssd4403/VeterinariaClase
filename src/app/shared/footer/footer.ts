@@ -10,10 +10,10 @@ export class Footer {
   anio: number = new Date().getFullYear();
 
   enlaces = [
-    {texto: 'Home', link:'#'},
-    {texto: 'Acerca', link:'#'},
-    {texto: 'Mascotas', link:'#'},
-    {texto: 'Contacto', link:'#'},
-    {texto: 'Registro', link:'#'},
+    { texto: 'Home', link: '#' },
+    { texto: 'Acerca', link: '#' },
+    { texto: 'Mascotas', link: '#' },
+    { texto: 'Contacto', link: '#' },
+    { texto: 'Registro', link: '#' },
   ]
 }

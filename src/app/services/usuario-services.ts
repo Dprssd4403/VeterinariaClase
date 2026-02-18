@@ -16,6 +16,7 @@ export interface Usuario{
 })
 export class UsuarioServices {
 
+
   private http = inject(HttpClient);
 
   private API_URL = 'https://web2-ea639-default-rtdb.firebaseio.com/usuarios'
