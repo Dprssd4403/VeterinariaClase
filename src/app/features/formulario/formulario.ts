@@ -1,72 +1,75 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Usuario, UsuarioServices } from '../../services/usuario-services';
 import { AuthService } from '../../services/auth-services';
+import { Salir } from '../../guards/guard-candeactived-guard'; 
 
 @Component({
   selector: 'app-formulario',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './formulario.html',
   styleUrl: './formulario.css',
 })
-export class Formulario implements OnInit {
+export class Formulario implements OnInit, Salir {
 
   private servicioUsuario = inject(UsuarioServices);
-
   public servicioAuth = inject(AuthService);
+  private router = inject(Router);
 
   listaUsuarios = signal<Usuario[]>([]);
-
   editando = false;
 
   nuevoUsuario: Usuario = {
-    
     name: '',
     email: '',
     phone: '',
-    password:'',
+    password: '',
     rol: 'EMPLEADO'
-    
   };
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.obtenerUsuarios();
   }
 
-  //Metodo obtenerUsuarios
   obtenerUsuarios() {
     this.servicioUsuario.getUsuarios().subscribe(usuarios => {
       this.listaUsuarios.set(usuarios);
     });
   }
- 
-  //MetodoGuardar
+
   guardarUsuario() {
-    if (this.editando && this.nuevoUsuario.id) {
-      this.servicioUsuario.putUsuario(this.nuevoUsuario.id, this.nuevoUsuario).subscribe(() => {
-        this.obtenerUsuarios();
-        this.resetear();
-      });
-    }
-    else {
-      this.servicioUsuario.postUsuario(this.nuevoUsuario).subscribe(() => {
-        this.obtenerUsuarios();
-        this.resetear();
-      })
+    const accion = this.editando ? 'actualizar' : 'registrar';
+    
+    if (confirm(`¿Estás seguro de que deseas ${accion} a este usuario?`)) {
+      
+      if (this.editando && this.nuevoUsuario.id) {
+        this.servicioUsuario.putUsuario(this.nuevoUsuario.id, this.nuevoUsuario).subscribe(() => {
+          this.finalizarYSalir();
+        });
+      } else {
+        this.servicioUsuario.postUsuario(this.nuevoUsuario).subscribe(() => {
+          this.finalizarYSalir();
+        });
+      }
     }
   }
 
-  //Metodo Eliminar
+  private finalizarYSalir() {
+    this.obtenerUsuarios();
+    this.resetear();
+    this.router.navigate(['/']);
+  }
+
   eliminarUsuario(id: string) {
     if (confirm('¿Desea eliminar el registro?')) {
       this.servicioUsuario.deleteUsuario(id).subscribe(() => {
         this.listaUsuarios.set(this.listaUsuarios().filter(u => u.id !== id));
-      })
+      });
     }
   }
 
-  //Metodo para poner los datos seleccionados en el formulario
   seleccionarParaEditar(user: Usuario) {
     this.editando = true;
     this.nuevoUsuario = { ...user };
@@ -74,17 +77,25 @@ export class Formulario implements OnInit {
 
   resetear() {
     this.editando = false;
-    this.nuevoUsuario = { name: '', email: '', phone: '' , password:'', rol: 'EMPLEADO'}
+    this.nuevoUsuario = { 
+      name: '', 
+      email: '', 
+      phone: '', 
+      password: '', 
+      rol: 'EMPLEADO' 
+    };
   }
 
-  /*guardarUsuario() {
+  permiteSalir(): boolean {
+    const hayDatosIntroducidos = 
+      (this.nuevoUsuario.name?.trim() ?? '') !== '' || 
+      (this.nuevoUsuario.email?.trim() ?? '') !== '' || 
+      (this.nuevoUsuario.phone?.trim() ?? '') !== '';
 
-    this.servicioUsuario.postUsuario(this.nuevoUsuario).subscribe(respuesta => {
-      //...Spread Operator: combina el nuevo usuario con la lista Usuarios                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-      this.listaUsuarios.set([respuesta, ...this.listaUsuarios()]);
-      //limpiar el form
-      this.nuevoUsuario = { name: '', email: '', phone: '' };
-    })
-  }*/
+    if (this.editando || hayDatosIntroducidos) {
+      return confirm('Tienes cambios sin guardar en el formulario. ¿Deseas salir de todas formas?');
+    }
 
+    return true;
+  }
 }

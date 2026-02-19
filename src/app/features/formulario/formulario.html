@@ -60,25 +60,17 @@
                         <td class="p-4 text-slate-800 font-medium">{{usuario.name}}</td>
                         <td class="p-4 text-slate-600">{{usuario.email}}</td>
                         <td class="p-4 text-slate-600">{{usuario.phone}}</td>
-                        <td class="p-4 text-center">
-                            
-                            @if(servicioAuth.rolActual() === 'ADMIN'){
-                                <div class="flex justify-center gap-4">
-                                    <button type="button" (click)="seleccionarParaEditar(usuario)" title="Editar"
-                                        class="hover:scale-125 transition-transform text-xl">
-                                        🖊
-                                    </button>
-                                    <button type="button" (click)="eliminarUsuario(usuario.id!)" title="Eliminar"
-                                        class="hover:scale-125 transition-transform text-xl">
-                                        🗑
-                                    </button>
-                                </div>
-                            } @else {
-                                <span class="text-gray-400 italic text-sm flex items-center justify-center gap-1">
-                                    🔒  
-                                </span>
-                            }
-
+                        <td class="p-4">
+                            <div class="flex justify-center gap-4">
+                                <button type="button" (click)="seleccionarParaEditar(usuario)" title="Editar"
+                                    class="hover:scale-125 transition-transform text-xl">
+                                    🖊
+                                </button>
+                                <button type="button" (click)="eliminarUsuario(usuario.id!)" title="Eliminar"
+                                    class="hover:scale-125 transition-transform text-xl">
+                                    🗑
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     } @empty {

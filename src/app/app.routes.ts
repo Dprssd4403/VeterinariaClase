@@ -8,6 +8,8 @@ import { Contacto } from './features/contacto/contacto';
 import { FormularioCuenta } from './shared/formulario-cuenta/formulario-cuenta';
 import { Login } from './features/login/login';
 import { authGuard } from './guards/auth-guard';
+import { authGuardDeactivate } from './guards/guard-candeactived-guard';
+
 
 export const routes: Routes = [
 
@@ -17,7 +19,7 @@ export const routes: Routes = [
     { path: 'acerca', component: Acerca },
     { path: 'consulta', component: Consulta },
     { path: 'mascota', component: Mascotas},
-    { path: 'registro', component: Registro, canActivate: [authGuard]},
+    { path: 'registro', component: Registro, canActivate: [authGuard], canDeactivate: [authGuardDeactivate]},
     { path: 'contacto', component: Contacto},
     { path: 'cuenta', component:FormularioCuenta},
     { path: 'login', component: Login}
