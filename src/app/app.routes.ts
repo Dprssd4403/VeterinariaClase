@@ -9,8 +9,6 @@ import { FormularioCuenta } from './shared/formulario-cuenta/formulario-cuenta';
 import { Login } from './features/login/login';
 import { authGuard } from './guards/auth-guard';
 import { authGuardDeactivate } from './guards/guard-candeactived-guard';
-import { adminGuard } from './guards/match-guard';
-import { adminChildGuard } from './guards/active-child-guard';
 
 
 
@@ -22,23 +20,12 @@ export const routes: Routes = [
     { path: 'acerca', component: Acerca },
     { path: 'consulta', component: Consulta },
 
-    { path: 'registro', component: Registro, canActivate: [authGuard], canDeactivate: [authGuardDeactivate]},
-    { path: 'contacto', component: Contacto},
-    { path: 'cuenta', component:FormularioCuenta},
-    { path: 'login', component: Login},
-    {
-        path: 'admin',
-        canActivateChild: [adminChildGuard],
-        children: [
-            {
-                path: 'mascota',
-                component: Mascotas,
-                canMatch: [adminGuard]
-            }
-        ]
-    },
+    { path: 'registro', component: Registro, canActivate: [authGuard], canDeactivate: [authGuardDeactivate] },
+    { path: 'contacto', component: Contacto },
+    { path: 'cuenta', component: FormularioCuenta },
+    { path: 'login', component: Login },
+    { path: 'mascota',component: Mascotas,},
     //FINAL
     //3.Redireccion si el usuario escribe una url que no existe
     //{path:'**', component:Pagina404}
-
 ];

@@ -1,6 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { UsuarioServices } from './usuario-services';
 import { map, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Usuario } from '../models/usuarios';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +10,7 @@ import { map, Observable } from 'rxjs';
 export class AuthService {
 
   private servicioUsuario = inject(UsuarioServices);
+  private http = inject(HttpClient);
 
   //localStorage
   sesionIniciada = signal<boolean>(localStorage.getItem('sesion') === 'true');
@@ -15,11 +18,12 @@ export class AuthService {
   //Accedemos al rol de usuario
   rolActual = signal<string | null>(localStorage.getItem('rol'));
 
+  private API_URL = 'http://localhost:8080/login';
 
-  login(email: string, password: string): Observable<boolean> {
-    return this.servicioUsuario.getUsuarios().pipe(
-      map(usuarios => {
-        const usuarioCoincide = usuarios.find(u => u.email === email && u.password === password);
+  login(email: string, passw: string): Observable<boolean> {
+
+    return this.http.post<Usuario | null>(this.API_URL, {email, password: passw}).pipe(
+      map(usuarioCoincide => {
         if (usuarioCoincide) {
           localStorage.setItem('sesion', 'true');
           //guardar estos datos convirtiendo el objeto json a texto
@@ -36,11 +40,6 @@ export class AuthService {
       })
     );
   }
-
-    getRole(): string | null {
-    return this.rolActual();
-  }
-
 
   logout() {
     localStorage.removeItem('sesion');

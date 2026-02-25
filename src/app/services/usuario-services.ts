@@ -20,7 +20,7 @@ export class UsuarioServices {
 
   private http = inject(HttpClient);
 
-  private API_URL = 'https://localhost:8080/usuarios'
+  private API_URL = 'http://localhost:8080/usuarios';
 
 
   /*
