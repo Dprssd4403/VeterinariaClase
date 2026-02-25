@@ -1,9 +1,8 @@
 export interface Usuario {
   id?: number;
-  name: string;
+  nombre: string;
   email: string;
-  phone: string;
   password: string;
-  rol: 'ADMIN'|'USUARIO';
+  rol: 'ROLE_ADMIN'|'ROLE_VETERINARIO';
 }
 

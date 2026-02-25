@@ -37,6 +37,11 @@ export class AuthService {
     );
   }
 
+    getRole(): string | null {
+    return this.rolActual();
+  }
+
+
   logout() {
     localStorage.removeItem('sesion');
     localStorage.removeItem('user');
